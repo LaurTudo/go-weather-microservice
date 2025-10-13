@@ -28,3 +28,18 @@ type WeatherResponse struct {
 		} `json:"forecastday"`
 	} `json:"forecast"`
 }
+
+// Simple structures, for api response for --mode server
+type WeatherSummary struct {
+	City      string         `json:"city"`
+	Country   string         `json:"country"`
+	TempC     float32        `json:"current_temp"`
+	Condition string         `json:"condition"`
+	Forecast  []HourForecast `json:"forecast"`
+}
+
+type HourForecast struct {
+	Hour      int     `json:"hour"`
+	TempC     float32 `json:"temp"`
+	Condition string  `json:"condition"`
+}
