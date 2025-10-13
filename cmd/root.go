@@ -8,6 +8,7 @@ import (
 
 	"goweathermicroservice/internal/api"
 	"goweathermicroservice/internal/model"
+	"goweathermicroservice/server"
 
 	"github.com/joho/godotenv"
 )
@@ -24,9 +25,16 @@ func Run() {
 		os.Exit(1)
 	}
 
-	// CLI flag
+	// CLI flags
+	mode := flag.String("mode", "cli", "Run mode: cli or server")
 	city := flag.String("city", "London", "City name for weather forecast")
 	flag.Parse()
+
+	// if flag mode server, call RunServer func
+	if *mode == "server" {
+		server.RunServer(apiKey)
+		return
+	}
 
 	// fetch weather
 	weather, err := api.FetchWeather(apiKey, *city)
