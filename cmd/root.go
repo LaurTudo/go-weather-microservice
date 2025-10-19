@@ -14,9 +14,9 @@ import (
 )
 
 func Run() {
-	// load api key from env file
-	if err := godotenv.Load("secrets.env"); err != nil {
-		fmt.Println(".env file could not be loaded:", err)
+	// load api key from env file - if it exists
+	if _, err := os.Stat("secrets.env"); err == nil {
+		godotenv.Load("secrets.env")
 	}
 
 	apiKey := os.Getenv("WEATHER_API_KEY")
