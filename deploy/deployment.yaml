@@ -15,5 +15,13 @@ spec:
       containers:
       - name: go-weather-container
         image: go-weather:latest
+        imagePullPolicy: IfNotPresent
+        args: ["--mode=server"]
+        env:
+        - name: WEATHER_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: weather-secret
+              key: WEATHER_API_KEY
         ports:
         - containerPort: 8080
