@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-weather
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-weather
+  template:
+    metadata:
+      labels:
+        app: go-weather
+    spec:
+      containers:
+      - name: go-weather-container
+        image: go-weather:latest
+        imagePullPolicy: IfNotPresent
+        args: ["--mode=server"]
+        env:
+        - name: WEATHER_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: weather-secret
+              key: WEATHER_API_KEY
+        ports:
+        - containerPort: 8080
