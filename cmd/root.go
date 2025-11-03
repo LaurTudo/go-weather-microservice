@@ -8,7 +8,7 @@ import (
 
 	"goweathermicroservice/internal/api"
 	"goweathermicroservice/internal/model"
-	"goweathermicroservice/server"
+	"goweathermicroservice/internal/server"
 
 	"github.com/joho/godotenv"
 )
